@@ -5,6 +5,7 @@ require_relative 'boot'
 require 'rails'
 require 'active_record/railtie'
 require 'action_controller/railtie'
+require "active_job/railtie"
 
 Bundler.require(*Rails.groups)
 
