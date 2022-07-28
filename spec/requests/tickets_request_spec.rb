@@ -159,6 +159,55 @@ RSpec.describe "Tickets", type: :request do
       it_behaves_like "event not found"
     end
   end
+
+  describe "POST events#reserve_ticket" do
+    subject { post "/tickets/reserve", params: params }
+
+    before { subject }
+    context "event exists" do
+      context "reservation exists" do
+        let(:event) { create(:event, :with_ticket) }
+        let(:ticket) { create(:ticket, :with_reservation) }
+        let(:reservation) { event.reservation }
+
+        context "valid params" do
+          let(:params) { { event_id: event.id, user_id: "1", tickets_count: "1" } }
+
+          it "should have correct HTTP status" do
+            expect(response).to have_http_status(:ok)
+          end
+
+          it "should render success message" do
+            expect(response_json).to eq({ success: "Reservation succeeded." })
+          end
+        end
+
+        context "wrong number of tickets" do
+          let(:params) { { event_id: event.id, user_id: "1", tickets_count: "-2" } }
+
+          it "should have correct HTTP status" do
+            expect(response).to have_http_status(:unprocessable_entity)
+          end
+
+          it "should render success message" do
+            expect(response_json).to eq({ error: "Number of tickets must be greater than zero." })
+          end
+        end
+
+        context "not enough tickets left" do
+          let(:params) { { event_id: event.id, user_id: "1", tickets_count: ticket.available + 1 } }
+
+          it "should have correct HTTP status" do
+            expect(response).to have_http_status(422)
+          end
+
+          it "should render correct error message" do
+            expect(response_json).to eq({ error: "Not enough tickets left." })
+          end
+        end
+      end
+    end
+  end
 end
 
 def response_json
