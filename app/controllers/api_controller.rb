@@ -2,7 +2,7 @@
 
 class ApiController < ApplicationController
   rescue_from TicketPayment::ReservationExpiredError, with: :conflict_error
-  rescue_from TicketPayment::NotEnoughTicketsError, with: :conflict_error
+  rescue_from TicketReservation::NotEnoughTicketsError, with: :conflict_error
   rescue_from Payment::Gateway::CardError, Payment::Gateway::PaymentError,
               with: :payment_failed_error
 
