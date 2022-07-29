@@ -5,6 +5,6 @@ class Event < ApplicationRecord
   validates :time, presence: :true
 
   def formatted_time
-    time&.strftime("%d %B %Y, %H:%M")
+    time.strftime("%d %B %Y, %H:%M")
   end
 end
