@@ -23,12 +23,13 @@
 ### Endpoints
 
 GET Events list => `GET`:`http://localhost:3000/events`
+<br/>
 GET Ticket for Event => `GET`:`http://localhost:3000/tickets`
 
 ```
 Params:
  {
-	 "event_id": "1"
+   "event_id": "1"
  }
 ```
 
@@ -37,9 +38,9 @@ POST Reservation => `POST`:`http://localhost:3000/tickets/reserve`
 ```
 Params:
  {
-	 "event_id": "1",
-	 "user_id": "1",
-	 "tickets_count":"1"
+    "event_id": "1",
+    "user_id": "1",
+    "tickets_count":"1"
  }
 ```
 
@@ -48,13 +49,14 @@ POST Buy => `POST`:`http://localhost:3000/tickets/buy`
 ```
 Params:
  {
-	 "user_id":"2",
-   	"token": "token"
-	 "event_id": "6",
+    "user_id":"2",
+    "token": "token"
+    "event_id": "6",
  }
 ```
 
 ### Tests
 
 - Run `rspec` to execute all tests
-  <img width="528" alt="Screenshot 2022-07-29 at 14 40 05" src="https://user-images.githubusercontent.com/77038610/181742482-8020dc23-945a-4edf-8911-5dc87886c4d8.png">
+<br/>
+<img width="528" alt="Screenshot 2022-07-29 at 14 40 05" src="https://user-images.githubusercontent.com/77038610/181742482-8020dc23-945a-4edf-8911-5dc87886c4d8.png">
