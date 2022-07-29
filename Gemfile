@@ -19,8 +19,13 @@ group :development, :test do
   gem "rspec-rails", "~> 4.0.1"
 end
 
+group :test do 
+  gem "rspec-sidekiq"
+end
 group :development do
   gem "listen", "~> 3.2"
   gem "spring", "~> 2.1.1"
   gem "spring-watcher-listen", "~> 2.0.0"
 end
+
+gem "sidekiq", "~> 6.5"

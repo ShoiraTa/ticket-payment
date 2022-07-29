@@ -10,17 +10,26 @@ class TicketsController < ApiController
 
   def buy
     payment_token = params[:token]
-    tickets_count = params[:tickets_count].to_i
-    return wrong_number_of_tickets unless tickets_count > 0
-
-    TicketPayment.call(@tickets, payment_token, tickets_count)
+    user_id = params[:user_id]
+    TicketPayment.call(user_id, payment_token, @event)
     render json: { success: "Payment succeeded." }
   end
 
-  private
+  def reserve
+    tickets_count = params[:tickets_count].to_i
+    return wrong_number_of_tickets unless tickets_count > 0
+    @reservation = @event.ticket.reservations.new(reservation_params)
+    TicketReservation.call(@event.ticket, tickets_count)
+    if @reservation.save
+      render json: { success: "Reservation succeeded." }
+    end
+    ReservationExpiredWorker.perform_in(901.seconds)
+  end
 
-  def ticket_params
-    params.permit(:event_id, :token, :tickets_count)
+  private 
+
+  def reservation_params
+    params.permit(:tickets_count, :user_id)
   end
 
   def set_event
@@ -41,4 +50,5 @@ class TicketsController < ApiController
   def wrong_number_of_tickets
     render json: { error: "Number of tickets must be greater than zero." }, status: :unprocessable_entity
   end
+
 end
