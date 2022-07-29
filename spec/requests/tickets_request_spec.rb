@@ -51,7 +51,7 @@ RSpec.describe "Tickets", type: :request do
 
         it "should have correct HTTP status" do
           expect(response).to have_http_status(:not_found)
-          
+
         end
 
         it "should render error" do
@@ -74,8 +74,7 @@ RSpec.describe "Tickets", type: :request do
     let(:event) { create(:event, :with_ticket) }
     let(:ticket) { create(:ticket, :with_reservation) }
     before do
-      @res = Reservation.create(user_id: 1, tickets_count: 1, ticket_id: ticket.id )
-      print 'first', @res.ticket.event.id
+      @res = Reservation.create(user_id: 1, tickets_count: 1, ticket_id: ticket.id)
     end
 
     context "rservation exists" do
@@ -87,7 +86,6 @@ RSpec.describe "Tickets", type: :request do
           let(:params) { { event_id:  @res.ticket.event.id, token: "token", user_id: "1" } }
 
           it "should have correct HTTP status" do
-            print 'second',event.id
             expect(response).to have_http_status(:ok)
           end
 
@@ -119,16 +117,13 @@ RSpec.describe "Tickets", type: :request do
             expect(response_json).to eq({ error: "Something went wrong with your transaction." })
           end
         end
+        context "event does not exist" do
+          let(:params) { { event_id: "incorrect", token: "token", user_id: "1" } }
 
+          it_behaves_like "event not found"
+        end
       end
-
     end
-
-    # context "event does not exist" do
-    #   let(:params) { { event_id: "incorrect", token: "token", tickets_count: "1" } }
-
-    #   it_behaves_like "event not found"
-    # end
   end
 
   describe "POST events#reserve_ticket" do
