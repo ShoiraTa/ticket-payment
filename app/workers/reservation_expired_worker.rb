@@ -1,6 +1,7 @@
 # frozen_string_literal: true
+require 'sidekiq/api'
 
-class ReservationExpiredWorker
+class ReservationExpiredWorker 
   include Sidekiq::Worker
   def perform
     Reservation.created_15_min_ago.map do |reservation|

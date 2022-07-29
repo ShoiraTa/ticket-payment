@@ -4,7 +4,6 @@ RSpec.describe TicketReservation do
   describe ".call" do
     let(:event) { create(:event, :with_ticket) }
     let(:ticket) { create(:ticket, :with_reservation) }
-    let(:user_id) { 1 }
     let(:tickets_count) { 1 }
 
     subject { described_class.call(ticket, tickets_count) }

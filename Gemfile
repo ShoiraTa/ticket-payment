@@ -17,9 +17,11 @@ group :development, :test do
   gem "factory_bot_rails", "~> 6.1.0"
   gem "faker", "~> 2.14.0"
   gem "rspec-rails", "~> 4.0.1"
-  gem "rspec-sidekiq"
 end
 
+group :test do 
+  gem "rspec-sidekiq"
+end
 group :development do
   gem "listen", "~> 3.2"
   gem "spring", "~> 2.1.1"

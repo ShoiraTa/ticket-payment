@@ -23,14 +23,10 @@ class TicketsController < ApiController
     if @reservation.save
       render json: { success: "Reservation succeeded." }
     end
-    ReservationExpiredWorker.perform_at(1.minutes.from_now)
+    ReservationExpiredWorker.perform_in(901.seconds)
   end
 
-  private
-
-  def ticket_params
-    params.permit(:event_id, :token, :tickets_count)
-  end
+  private 
 
   def reservation_params
     params.permit(:tickets_count, :user_id)
@@ -55,7 +51,4 @@ class TicketsController < ApiController
     render json: { error: "Number of tickets must be greater than zero." }, status: :unprocessable_entity
   end
 
-  def not_enough_tickets
-    render json: { error: "Not enough tickets left." }, status: :unprocessable_entity
-  end
 end

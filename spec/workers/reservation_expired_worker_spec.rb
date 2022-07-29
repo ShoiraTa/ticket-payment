@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require "rails_helper" # include in your RSpec file
-require "sidekiq/testing" # include in your Rspec file
-Sidekiq::Testing.fake! # include in your RSpec file
+require "rails_helper"
+require "sidekiq/testing"
+Sidekiq::Testing.fake!
 
 RSpec.describe ReservationExpiredWorker, type: :worker do
   let(:time) { (Time.zone.today + 6.hours).to_datetime }
