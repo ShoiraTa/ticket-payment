@@ -58,9 +58,9 @@ Params:
 ### Tests
 
 - Run `rspec` to execute all tests
-<br/>
-<img width="528" alt="Screenshot 2022-07-29 at 14 40 05" src="https://user-images.githubusercontent.com/77038610/181742482-8020dc23-945a-4edf-8911-5dc87886c4d8.png">
-=======
+  <br/>
+  <img width="528" alt="Screenshot 2022-07-29 at 14 40 05" src="https://user-images.githubusercontent.com/77038610/181742482-8020dc23-945a-4edf-8911-5dc87886c4d8.png">
+  =======
 
 ### Setup steps
 
@@ -68,9 +68,3 @@ Params:
 - Run `bundle install`·
 - Setup database `rails db:setup`
 - Run server `rails s`
-
-### Task
-
-- [junior](task_junior.md)
-- [regular/senior](task_regular_senior.md)
-
